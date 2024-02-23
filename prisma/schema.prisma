@@ -20,6 +20,8 @@ model ToDo {
   user    User     @relation(fields: [userId], references: [id])
   userId  Int
   dueTime DateTime
+
+  @@index([image])
 }
 
 model User {

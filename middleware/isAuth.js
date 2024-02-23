@@ -25,7 +25,8 @@ try{
         error.statusCode = 404;
         throw error;
     };
-    req.user = user;
+    req.email = user.email;
+    req.userId = user.id
     next()
 }
 catch(err){

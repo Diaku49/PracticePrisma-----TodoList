@@ -1,7 +1,9 @@
 const {validationResult} = require('express-validator');
 const {PrismaClient} = require('@prisma/client');
-const { UserById, CreateUser } = require('../prisma/prisma');
-const prisma = new PrismaClient();
+const { UserById, CreateUser, AccessToken } = require('../prisma/prisma');
+const prisma = new PrismaClient({
+    rejectOnNotFound:true
+});
 require('../prisma/prisma');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
@@ -17,10 +19,15 @@ try{
             data:{
                 name:user.name,
                 email:user.email,
-                accessToken:accessToken
+                accessToken:user.accessToken
             }
         })
+        return res.status(200).json({
+            message:'Signed In',
+            token:token
+        })
     }
+    await AccessToken(user.email,user.accessToken);
     res.status(200).json({
         message:'Signed In',
         token:token
@@ -88,6 +95,7 @@ try{
         error.statusCode = 409;
         throw error;
     };
+    await AccessToken(user.email,user.accessToken);
     const token = jwt.sign({email:email},process.env.JWT_SECRET,{expiresIn:'1h'});
     res.status(200).json({
         message:'Loged in',

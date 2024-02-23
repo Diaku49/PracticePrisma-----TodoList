@@ -30,7 +30,7 @@ const fileFilter = (req,file,cb)=>{
 
 
 const AuthRouter = require('./routes/auth');
-
+const ToDoRouter = require('./routes/ToDo');
 
 
 
@@ -58,6 +58,7 @@ app.use((req,res,next)=>{
 
 
 app.use('/auth',AuthRouter);
+app.use('/ToDo',ToDoRouter);
 
 
 
@@ -74,8 +75,15 @@ app.use('/auth',AuthRouter);
 
 
 
-
-
+app.use((error,req,res,next)=>{
+    console.log(error);
+    const errorStatusCode = error.statusCode || 500;
+    const errorData = error.data;
+    const message = error.message;
+    res.sendStatus(errorStatusCode).json({
+        message:message,data:errorData
+    })
+})
 
 
 app.listen(process.env.PORT)
