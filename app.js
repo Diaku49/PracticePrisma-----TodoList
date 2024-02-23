@@ -29,7 +29,7 @@ const fileFilter = (req,file,cb)=>{
 
 
 
-
+const AuthRouter = require('./routes/auth');
 
 
 
@@ -54,6 +54,17 @@ app.use((req,res,next)=>{
     }
     next();
 })
+
+
+
+app.use('/auth',AuthRouter);
+
+
+
+
+
+
+
 
 
 
