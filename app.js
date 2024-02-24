@@ -31,7 +31,7 @@ const fileFilter = (req,file,cb)=>{
 
 const AuthRouter = require('./routes/auth');
 const ToDoRouter = require('./routes/ToDo');
-
+const UARouter = require('./routes/User&Admin');
 
 
 
@@ -59,15 +59,7 @@ app.use((req,res,next)=>{
 
 app.use('/auth',AuthRouter);
 app.use('/ToDo',ToDoRouter);
-
-
-
-
-
-
-
-
-
+app.use('/UA',UARouter);
 
 
 

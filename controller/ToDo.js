@@ -1,6 +1,5 @@
 const {PrismaClient} = require('@prisma/client');
-const { emit } = require('nodemon');
-const prisma = new PrismaClient()
+const prisma = new PrismaClient();
 require('../prisma/prisma');
 const {validationResult} = require('express-validator');
 const { HandleImage } = require('../prisma/prisma');
