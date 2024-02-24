@@ -118,7 +118,7 @@ try{
         },
         data:{
             title:req.body.title,
-            dueTime:Date,
+            dueTime:req.body.dueTime,
             image:imagePath
         }
     });
