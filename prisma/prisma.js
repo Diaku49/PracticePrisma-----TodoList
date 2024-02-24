@@ -14,7 +14,6 @@ catch(err){
 }
 }
 
-
 exports.AccessToken = async(Email,accessToken)=>{
 try{
     await prisma.user.update({
